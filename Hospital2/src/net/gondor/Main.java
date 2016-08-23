@@ -19,15 +19,13 @@ public class Main {
 		while (true) {
 			menu();
 			selNum = input.nextInt();
+			input.nextLine();
 			if (selNum == addDoctor) {
 				System.out.println("의사등록을 진행합니다.\n의사의 이름을 입력하세요.");
-				name = input.nextLine();
 				while (true) {
-					if (input.hasNextLine()) {
-						name = input.nextLine();
-					}
+					name = input.nextLine();
 					if (name.equals("")) {
-						System.out.println("아무것도");
+						System.out.println("아무것도 입력하지 않았습니다.\n의사의 이름을 입력하세요.");
 					} else {
 						hos.addDoctor(name);
 						break;
@@ -70,7 +68,7 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("근재근재병원입니다.\n");
+		System.out.println("근재근재병원입니다.");
 		new Main().management();
 	}
 }
