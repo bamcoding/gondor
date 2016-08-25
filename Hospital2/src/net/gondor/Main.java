@@ -55,9 +55,57 @@ public class Main {
 				//입력을 돕기위해 의사목록을 보여줍니다.
 				doctorName = input.next();
 				hos.showPatient(doctorName);
+=======
+			if (selNum == HospitalAction.ADD_DOCTOR) {
+				addDoctor();//수정된 코드를 이클립스로 올립니다.
 			} 
-			else if (selNum == exit) {
+			else if (selNum == HospitalAction.ADD_DOCTOR) {
+				addPatient();
+			} 
+			else if (selNum == HospitalAction.SHOW_PATIENT) {
+				showPatient();
+>>>>>>> 8941d8c5caca4926cb718c8fd84b1b3bf3d3fb43
+			} 
+			else if (selNum == HospitalAction.QUIT) {
 				System.out.println("안녕히 가세요.");
+				break;
+			}
+			System.out.println();
+		}
+	}
+
+	private void showPatient() {
+		String name;
+		System.out.println("환자를 조회합니다.\n의사의 이름을 입력하세요.");
+		hos.showDoctor();
+		name = input.next();
+		hos.showPatient(name);
+	}
+
+	private void addPatient() {
+		String name;
+		String name2;
+		System.out.println("환자를 등록합니다.\n환자의 이름을 입력하세요.");
+		name = input.next();
+		hos.showDoctor();
+		while (true) {
+			System.out.println("원하시는 의사의 이름을 입력하세요.");
+			name2 = input.next();
+			if (hos.addPatient(name2, name)) {
+				break;
+			}
+		}
+	}
+
+	private void addDoctor() {
+		System.out.println("의사등록을 진행합니다.\n의사의 이름을 입력하세요.");
+		String name = input.nextLine();
+		while (true) {
+			name = input.nextLine();
+			if (name.length()==0) {
+				System.out.println("아무것도 입력하지 않았습니다.");
+			} else {
+				hos.addDoctor(name);
 				break;
 			}
 		}
