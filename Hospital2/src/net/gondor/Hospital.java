@@ -23,11 +23,11 @@ public class Hospital {
 	public void setPatient(Map<String, List<String>> patient) {
 		this.patient = patient;
 	}
-	public void showDoctor() {
+	public void showDoctor() {//123
 		System.out.println("================================");
 		for(int i =0; i<doctors.size();i++){
-		int pSize = patient.get(doctors.get(i)).size();
-		System.out.println((i+1)+". "+doctors.get(i)+"("+pSize+")");
+		int dSize = patient.get(doctors.get(i)).size();
+		System.out.println((i+1)+". "+doctors.get(i)+"("+dSize+")");
 		}
 		System.out.println("================================");
 	}

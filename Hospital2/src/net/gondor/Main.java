@@ -1,5 +1,7 @@
 package net.gondor;
-
+/**
+ * 추상화, 캡슐화, 정보은닉, 상속, 다형성
+ */
 import java.util.Scanner;
 
 public class Main {
@@ -8,52 +10,62 @@ public class Main {
 	private final int showPatients = 3;
 	private final int exit = 4;
 	private int selNum;
-
+	Scanner input = new Scanner(System.in);
+	Hospital hos = new Hospital();
+	
 	public void management() {
-
-		Scanner input = new Scanner(System.in);
-		Hospital hos = new Hospital();
-
-		String name = "";
-		String name2 = "";
 		while (true) {
 			menu();
 			selNum = input.nextInt();
 			if (selNum == addDoctor) {
-				System.out.println("의사등록을 진행합니다.\n의사의 이름을 입력하세요.");
-				name = input.nextLine();
-				while (true) {
-					if (input.hasNextLine()) {
-						name = input.nextLine();
-					}
-					if (name.equals("")) {
-						System.out.println("아무것도");
-					} else {
-						hos.addDoctor(name);
-						break;
-					}
-				}
+				addDoctor();
 			} 
 			else if (selNum == addPatient) {
-				System.out.println("환자를 등록합니다.\n환자의 이름을 입력하세요.");
-				name = input.next();
-				hos.showDoctor();
-				while (true) {
-					System.out.println("원하시는 의사의 이름을 입력하세요.");
-					name2 = input.next();
-					if (hos.addPatient(name2, name)) {
-						break;
-					}
-				}
+				addPatient();
 			} 
 			else if (selNum == showPatients) {
-				System.out.println("환자를 조회합니다.\n의사의 이름을 입력하세요.");
-				hos.showDoctor();
-				name = input.next();
-				hos.showPatient(name);
+				showPatient();
 			} 
 			else if (selNum == exit) {
 				System.out.println("안녕히 가세요.");
+				break;
+			}
+			System.out.println();
+		}
+	}
+
+	private void showPatient() {
+		String name;
+		System.out.println("환자를 조회합니다.\n의사의 이름을 입력하세요.");
+		hos.showDoctor();
+		name = input.next();
+		hos.showPatient(name);
+	}
+
+	private void addPatient() {
+		String name;
+		String name2;
+		System.out.println("환자를 등록합니다.\n환자의 이름을 입력하세요.");
+		name = input.next();
+		hos.showDoctor();
+		while (true) {
+			System.out.println("원하시는 의사의 이름을 입력하세요.");
+			name2 = input.next();
+			if (hos.addPatient(name2, name)) {
+				break;
+			}
+		}
+	}
+
+	private void addDoctor() {
+		System.out.println("의사등록을 진행합니다.\n의사의 이름을 입력하세요.");
+		String name = input.nextLine();
+		while (true) {
+			name = input.nextLine();
+			if (name.length()==0) {
+				System.out.println("아무것도 입력하지 않았습니다.");
+			} else {
+				hos.addDoctor(name);
 				break;
 			}
 		}
