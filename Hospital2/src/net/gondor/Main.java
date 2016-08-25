@@ -19,7 +19,7 @@ public class Main {
 			selNum = input.nextInt();
 			input.nextLine();
 			if (selNum == addDoctor) {
-				addDoctor();
+				addDoctor();//수정된 코드를 이클립스로 올립니다.
 			} 
 			else if (selNum == addPatient) {
 				addPatient();
