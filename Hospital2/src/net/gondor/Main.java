@@ -19,20 +19,7 @@ public class Main {
 			selNum = input.nextInt();
 			input.nextLine();
 			if (selNum == addDoctor) {
-<<<<<<< HEAD
 				addDoctor();
-=======
-				System.out.println("의사등록을 진행합니다.\n의사의 이름을 입력하세요.");
-				while (true) {
-					name = input.nextLine();
-					if (name.equals("")) {
-						System.out.println("아무것도 입력하지 않았습니다.\n의사의 이름을 입력하세요.");
-					} else {
-						hos.addDoctor(name);
-						break;
-					}
-				}
->>>>>>> branch 'master' of https://bamcoding@github.com/bamcoding/gondor.git
 			} 
 			else if (selNum == addPatient) {
 				addPatient();
