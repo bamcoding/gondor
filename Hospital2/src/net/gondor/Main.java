@@ -4,11 +4,9 @@ package net.gondor;
  */
 import java.util.Scanner;
 
+import net.gondor.constant.HospitalAction;
+
 public class Main {
-	private final int addDoctor = 1;
-	private final int addPatient = 2;
-	private final int showPatients = 3;
-	private final int exit = 4;
 	private int selNum;
 	Scanner input = new Scanner(System.in);
 	Hospital hos = new Hospital();
@@ -18,16 +16,16 @@ public class Main {
 			menu();
 			selNum = input.nextInt();
 			input.nextLine();
-			if (selNum == addDoctor) {
+			if (selNum == HospitalAction.ADD_DOCTOR) {
 				addDoctor();//수정된 코드를 이클립스로 올립니다.
 			} 
-			else if (selNum == addPatient) {
+			else if (selNum == HospitalAction.ADD_DOCTOR) {
 				addPatient();
 			} 
-			else if (selNum == showPatients) {
+			else if (selNum == HospitalAction.SHOW_PATIENT) {
 				showPatient();
 			} 
-			else if (selNum == exit) {
+			else if (selNum == HospitalAction.QUIT) {
 				System.out.println("안녕히 가세요.");
 				break;
 			}
