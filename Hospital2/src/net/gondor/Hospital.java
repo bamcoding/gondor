@@ -23,7 +23,7 @@ public class Hospital {
 	public void setPatient(Map<String, List<String>> patient) {
 		this.patient = patient;
 	}
-	public void showDoctor() {//123
+	public void showDoctor() {//123123
 		System.out.println("================================");
 		for(int i =0; i<doctors.size();i++){
 		int dSize = patient.get(doctors.get(i)).size();
