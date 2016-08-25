@@ -55,7 +55,7 @@ public class Main {
 				//입력을 돕기위해 의사목록을 보여줍니다.
 				doctorName = input.next();
 				hos.showPatient(doctorName);
-=======
+
 			if (selNum == HospitalAction.ADD_DOCTOR) {
 				addDoctor();//수정된 코드를 이클립스로 올립니다.
 			} 
@@ -64,7 +64,6 @@ public class Main {
 			} 
 			else if (selNum == HospitalAction.SHOW_PATIENT) {
 				showPatient();
->>>>>>> 8941d8c5caca4926cb718c8fd84b1b3bf3d3fb43
 			} 
 			else if (selNum == HospitalAction.QUIT) {
 				System.out.println("안녕히 가세요.");
