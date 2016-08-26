@@ -14,6 +14,7 @@ public class Main {
 		int num1 = input.nextInt();
 		System.out.println("두번째 숫자를 입력하세요");
 		int num2 = input.nextInt();
+		
 		Calculator.getValue(num1, num2);
 	}
 }
