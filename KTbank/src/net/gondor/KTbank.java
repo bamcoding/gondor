@@ -5,23 +5,7 @@ import java.util.UUID;
 import java.util.Map;
 import java.util.HashMap;
 
-public class KTbank {
-	/**
-	 * 고객 생성
-	 */
-	private static final String createCustomer = "0";
-	/**
-	 * 계좌 개설
-	 */
-	private static final String createAccount = "1";
-	/**
-	 * 계좌 입금/출금
-	 */
-	private static final String useAccount = "2";
-	/**
-	 * 종료
-	 */
-	private static final String quit = "3";
+public class KTbank implements BankInterface{
 	/**
 	 * 준비금
 	 */
@@ -55,13 +39,13 @@ public class KTbank {
 		while (true) {
 			showMenu();
 			scanChar = input.nextLine();
-			if (scanChar.equals(createCustomer)) {
+			if (scanChar.equals(CREATE_CUSTOMER)) {
 				createCustomer();
-			} else if (scanChar.equals(createAccount)) {
+			} else if (scanChar.equals(CREATE_ACCOUNT)) {
 				createAccount();
-			} else if (scanChar.equals(useAccount)) {
+			} else if (scanChar.equals(USE_ACCOUNT)) {
 				useAccount();
-			} else if (scanChar.equals(quit)) {
+			} else if (scanChar.equals(QUIT)) {
 				System.out.println("안녕히 가세요.");
 				break;
 			} else {
@@ -81,8 +65,19 @@ public class KTbank {
 		String name = input.nextLine();
 		if (!account.containsKey(name)) {
 			System.out.println("등록된 계좌가 없습니다. 계좌 등록을 먼저 해주세요");
-			createAccount();
+			//// 계좌가 없다면 업무가 불가능합니다.
+			if(!createAccount()){
+				System.out.println("계좌를 개설하기에는 돈이 부족합니다.");
+				System.out.println("처음으로 돌아갑니다");	
+			}
 		}
+		//계좌가 없다면
+		else if(account.containsKey(name)){
+			useAccount(name);
+		}
+	}
+
+	private void useAccount(String name) {
 		System.out.printf("\"%s\"님의 계좌 정보입니다.\n", name);
 		infoAccount(name);
 		System.out.println("맞습니까?(Y/N)");
@@ -102,7 +97,8 @@ public class KTbank {
 				input.nextLine();
 				if (!isCustomerMoney(name, depositMoney)) {
 					System.out.println("잔액이 부족합니다.");
-				} else {
+				} 
+				else {
 					// 고객의 잔액에서 금액을 뺀다.
 					receiveMoneyFromCustomer(name, depositMoney);
 					// 계좌에 입금한다.
@@ -110,12 +106,17 @@ public class KTbank {
 					System.out.printf("\"%s\"님이 가진 현금 중  %,d원을 계좌에 입금했습니다.\n", name, depositMoney);
 					checkAccountD(name);
 				}
-			} else if (scanChar.equals("2")) {
+			} 
+			else if (scanChar.equals("2")) {
 				accessWithdraw(name);
-			} else {
+			} 
+			//취소 혹은 아무거나 입력하면 업무를 취소합니다.
+			else {
 				System.out.println("처음으로 돌아갑니다");
 			}
-		} else {
+		} 
+		//고객이 등록되있지 않다면 업무를 진행할 수 없습니다.
+		else {
 			System.out.println("등록된 계좌가 없습니다. 계좌 등록을 먼저 해주세요");
 			createCustomer();
 		}
@@ -230,7 +231,8 @@ public class KTbank {
 	/**
 	 * 계좌 개설을 담당하는 메소드
 	 */
-	private void createAccount() {
+	private boolean createAccount() {
+		boolean isCreatedAccount = false;
 		System.out.println("계좌 개설 업무를 도와 드리겠습니다.");
 		System.out.println("예금주 명을 입력해 주세요");
 		String name = input.nextLine();
@@ -241,6 +243,17 @@ public class KTbank {
 		System.out.println("N을 입력하면, 개설업무가 취소됩니다.");
 		System.out.println("계속하시겠습니까?(Y/N)");
 		scanChar = input.nextLine();
+		isCreatedAccount = isCreatedAccount(name, accountNum);
+		return isCreatedAccount;
+	}
+	/**
+	 * 계좌개설이 되었는지 안되었는지 확인하는 메소드
+	 * @param name
+	 * @param accountNum
+	 * @return
+	 */
+	private boolean isCreatedAccount(String name, String accountNum) {
+		boolean isCreatedAccount = false;
 		if (scanChar.equalsIgnoreCase("y")) {
 			// 고객의 잔액과 5,000원을 비교하는 함수 조건
 			int customerMoney = customer.get(name).getMoney();
@@ -252,6 +265,7 @@ public class KTbank {
 				// 고객의 잔액에서 5,000을 뺀다
 				receiveMoneyFromCustomer(name, 5000);
 				giveMoneyToAccount(name, 5000);
+				isCreatedAccount = true;
 				// 계좌 확인
 				checkAccountD(name);
 			} else {
@@ -263,6 +277,7 @@ public class KTbank {
 			System.out.println("계좌 개설을 취소합니다.");
 			System.out.println("안녕히 가세요.");
 		}
+		return isCreatedAccount;
 	}
 
 	/**
