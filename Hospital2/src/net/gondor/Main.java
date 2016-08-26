@@ -2,12 +2,14 @@ package net.gondor;
 
 import java.util.Scanner;
 
+import net.gondor.constant.HospitalAction;
+
 public class Main {
 	private final int addDoctor = 1;
 	private final int addPatient = 2;
 	private final int showPatients = 3;
 	private final int exit = 4;
-	
+
 	/**
 	 * 의사나 환자의 추가, 조회를 총괄적으로 담당하는 메소드
 	 */
@@ -21,22 +23,20 @@ public class Main {
 			menu();
 			selNum = input.nextInt();
 			input.nextLine();
-			//nextInt는 숫자만 공백이나 줄띄기는 무시합니다.
-			//그러므로 input.nextLine의 역할은 줄띄기입니다. 입력 기능은 무시됩니다.
+			// nextInt는 숫자만 공백이나 줄띄기는 무시합니다.
+			// 그러므로 input.nextLine의 역할은 줄띄기입니다. 입력 기능은 무시됩니다.
 			if (selNum == addDoctor) {
 				System.out.println("의사등록을 진행합니다.\n의사의 이름을 입력하세요.");
 				while (true) {
 					doctorName = input.nextLine();
 					if (doctorName.equals("")) {
 						System.out.println("아무것도 입력하지 않았습니다.\n의사의 이름을 입력하세요.");
-					} 
-					else {
+					} else {
 						hos.addDoctor(doctorName);
 						break;
 					}
 				}
-			} 
-			else if (selNum == addPatient) {
+			} else if (selNum == addPatient) {
 				System.out.println("환자를 등록합니다.\n환자의 이름을 입력하세요.");
 				patientName = input.next();
 				hos.showDoctor();
@@ -44,32 +44,29 @@ public class Main {
 					System.out.println("원하시는 의사의 이름을 입력하세요.");
 					doctorName = input.next();
 					if (hos.addPatient(doctorName, patientName)) {
-						//의사의 이름을 잘 입력해야 환자의 추가가 올바르게 됩니다
+						// 의사의 이름을 잘 입력해야 환자의 추가가 올바르게 됩니다
 						break;
 					}
 				}
-			} 
-			else if (selNum == showPatients) {
+			} else if (selNum == showPatients) {
 				System.out.println("환자를 조회합니다.\n의사의 이름을 입력하세요.");
 				hos.showDoctor();
-				//입력을 돕기위해 의사목록을 보여줍니다.
+				// 입력을 돕기위해 의사목록을 보여줍니다.
 				doctorName = input.next();
 				hos.showPatient(doctorName);
 
-			if (selNum == HospitalAction.ADD_DOCTOR) {
-				addDoctor();//수정된 코드를 이클립스로 올립니다.
-			} 
-			else if (selNum == HospitalAction.ADD_DOCTOR) {
-				addPatient();
-			} 
-			else if (selNum == HospitalAction.SHOW_PATIENT) {
-				showPatient();
-			} 
-			else if (selNum == HospitalAction.QUIT) {
-				System.out.println("안녕히 가세요.");
-				break;
+				if (selNum == HospitalAction.ADD_DOCTOR) {
+					addDoctor();// 수정된 코드를 이클립스로 올립니다.
+				} else if (selNum == HospitalAction.ADD_DOCTOR) {
+					addPatient();
+				} else if (selNum == HospitalAction.SHOW_PATIENT) {
+					showPatient();
+				} else if (selNum == HospitalAction.QUIT) {
+					System.out.println("안녕히 가세요.");
+					break;
+				}
+				System.out.println();
 			}
-			System.out.println();
 		}
 	}
 
@@ -101,7 +98,7 @@ public class Main {
 		String name = input.nextLine();
 		while (true) {
 			name = input.nextLine();
-			if (name.length()==0) {
+			if (name.length() == 0) {
 				System.out.println("아무것도 입력하지 않았습니다.");
 			} else {
 				hos.addDoctor(name);
