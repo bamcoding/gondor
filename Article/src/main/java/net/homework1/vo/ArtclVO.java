@@ -1,15 +1,16 @@
 package net.homework1.vo;
 
 public class ArtclVO {
-	public int articleId;
+	public int articlId;
 	public String subject;
 	public String content;
 	public String createDate;
-	public int getArticleId() {
-		return articleId;
+	
+	public int getArticlId() {
+		return articlId;
 	}
-	public void setArticleId(int articleId) {
-		this.articleId = articleId;
+	public void setArticlId(int articlId) {
+		this.articlId = articlId;
 	}
 	public String getSubject() {
 		return subject;
